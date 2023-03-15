@@ -2,6 +2,7 @@ import numpy as np
 import random as rnd
 from time import perf_counter
 import matplotlib.pyplot as plt
+from matplotlib.animation import PillowWriter
 
 
 def time_comparison():
@@ -73,6 +74,31 @@ def d3graphic():
     plt.title('3D  график sin(x*y)')
     plt.show()
 
-# time_comparison()
-# histogram()
-# d3graphic()
+
+def animation():
+    fig = plt.figure()
+    l, = plt.plot([], [])
+    plt.xlim(-7, 7)
+    plt.ylim((-1.5, 1.5))
+
+    def function(t):
+        return np.sin(t)
+
+    writer = PillowWriter(fps=15)
+
+    xval = []
+    yval = []
+
+    with writer.saving(fig, "sin_function.gif", 100):
+        for x in np.linspace(-10, 10, 100):
+            xval.append(x)
+            yval.append(function(x))
+            l.set_data(xval, yval)
+            writer.grab_frame()
+
+
+if __name__ == '__main__':
+time_comparison()
+histogram()
+d3graphic()
+animation()
