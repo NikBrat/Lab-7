@@ -66,12 +66,12 @@ def d3graphic():
     np.random.seed(28)
     x = np.linspace(-5, 5, 100)
     y = np.linspace(-5, 5, 100)
-    z = np.sin(x * y)
-
+    x, y = np.meshgrid(x, y)
+    z = np.sin(x ** y)
     fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    ax.Axes3d.plot(x, y, z, color='green')
-    plt.title('3D  график sin(x*y)')
+    ax = fig.add_subplot(111, projection="3d")
+    surf = ax.plot_wireframe(x, y, z, color="gray")
+    plt.title('3D  график sin(x^y)')
     plt.show()
 
 
@@ -98,7 +98,7 @@ def animation():
 
 
 if __name__ == '__main__':
-time_comparison()
-histogram()
-d3graphic()
-animation()
+    time_comparison()
+    histogram()
+    d3graphic()
+    animation()
